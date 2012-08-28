@@ -40,6 +40,8 @@ abstract class basePostModel extends top
 					$this->error('您没有权利编辑该文章',spUrl('main','index'));
 				}
 			}
+	
+
             
             if($one = spClass('db_blog')->findBy('bid',$bid)){
 				$split_data = split_attribute($one['body']);
@@ -83,14 +85,17 @@ abstract class basePostModel extends top
             spClass('db_blog')->update(array('bid'=>$bid),array('body'=>$body));
             $this->postToConnect($rows,$bodypre);
         }else{
+		
             $bid = $_SESSION['tempid'];
             $rows['body'] = $this->tmpfile2attach($bid,$rows['body']);
             spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
+		
         }
 		
         spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
 		$_SESSION['tempid'] = NULL;
         unset($_SESSION['tempid']);
+		
 		return $bid;
     }
     

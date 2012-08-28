@@ -24,14 +24,21 @@ class yb_photo extends basePostModel
     }
     
     function saved(){
+
         $used_image = $this->parseImg($this->spArgs('localimg'));
 		$serial = serialize($used_image);
+		
         if(is_array($used_image)){
              $bodypre = '[attribute]'.serialize($used_image).'[/attribute]';
         }
-       if(parent::saved($bodypre)){
-           header('Location:'.spUrl('main'));
+      if($_bid = parent::saved($bodypre)){
+           header('Location:'.spUrl('product','index',array('bid'=>$_bid)));
        }
+	   
+	   /*   if($_bid = parent::saved($bodypre)){
+			 print_r($_bid);
+           header('Location:'.spUrl('main'));
+       }*/
     }
     
     function edit(){
