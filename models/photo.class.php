@@ -26,7 +26,7 @@ class yb_photo extends basePostModel
     function saved(){
 
         $used_image = $this->parseImg($this->spArgs('localimg'));
-		$serial = serialize($used_image);
+		//$serial = serialize($used_image);
 		
         if(is_array($used_image)){
              $bodypre = '[attribute]'.serialize($used_image).'[/attribute]';
@@ -56,9 +56,12 @@ class yb_photo extends basePostModel
      /*处理发布图片模型*/
     private function parseImg($image)
     {
+	
         if(!is_array($image)){
             exit('File not found');
         }
+		$bid  = $this->spArgs('id',0);
+
         $num = 0;
         $datas = array('count'=>'','img'=>'');
         foreach($image as $id=>$data){
@@ -69,15 +72,23 @@ class yb_photo extends basePostModel
             
             foreach($data as $url=>$desc){
                $dsc = ($desc == '图片说明（选填）') ? '' : $desc;
+				if($bid != 0){
+					$url = parent::tmpfile2attach($bid,$url);
+					spClass('db_attach')->update(array('id'=>$id,'path'=>$url),array('blogdesc'=>$dsc));
+				}else{
+					spClass('db_attach')->update(array('id'=>$id),array('blogdesc'=>$dsc));
+				}
                 $datas['img'][] = array('url'=>$url,'desc'=>$dsc);
-				spClass('db_attach')->update(array('id'=>$id),array('blogdesc'=>$dsc));
-            }
 			
+			
+            }
+
             $num++;
         }
-		
+		if($bid != 0){
+			spClass('db_attach')->changeId($this->uid,$bid);
+		}
         $datas['count'] = count($datas['img']);
-
         return $datas;
     }
     

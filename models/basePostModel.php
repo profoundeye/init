@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////
 //云边开源轻博, Copyright (C)   2010 - 2011  qing.thinksaas.cn 
 //EMAIL:nxfte@qq.com QQ:234027573                              
-//$Id: basePostModel.php 1311 2012-07-24 12:47:48Z anythink $         
+//$Id: basePostModel.php 1377 2012-08-11 13:35:17Z anythink $         
 
 
 abstract class basePostModel extends top
@@ -40,8 +40,6 @@ abstract class basePostModel extends top
 					$this->error('您没有权利编辑该文章',spUrl('main','index'));
 				}
 			}
-	
-
             
             if($one = spClass('db_blog')->findBy('bid',$bid)){
 				$split_data = split_attribute($one['body']);
@@ -68,6 +66,7 @@ abstract class basePostModel extends top
 			'time' =>time()
         );
 		
+
 		$ret = $this->post_verify($this->spArgs('textarea')); //检测审核机制
 		if($ret['ret'] == 1){
 			$rows['open'] = -2; //被审核
@@ -82,20 +81,18 @@ abstract class basePostModel extends top
             spClass('db_attach')->changeId($this->uid,$bid);
             
             $body = $this->tmpfile2attach($bid,$rows['body']);
+
             spClass('db_blog')->update(array('bid'=>$bid),array('body'=>$body));
             $this->postToConnect($rows,$bodypre);
         }else{
-		
             $bid = $_SESSION['tempid'];
             $rows['body'] = $this->tmpfile2attach($bid,$rows['body']);
             spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
-		
         }
 		
         spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
 		$_SESSION['tempid'] = NULL;
         unset($_SESSION['tempid']);
-		
 		return $bid;
     }
     
@@ -116,9 +113,11 @@ abstract class basePostModel extends top
             }else{
                 $this->error('您没有权利编辑',spUrl('main','index'));
             }
-        }        
+        }
+		//print_r($this->body);
         $this->myattach(false);
         //$this->myTagUsually(); //我的常用标签
+
         $this->__parse_mytag($this->blog['tag']); //如果是编辑的则推送edit时的标签
         $this->body = split_attribute($this->blog['body']); //获得属性和正文信息 
     }
@@ -204,7 +203,7 @@ abstract class basePostModel extends top
     
     
     /*将文章内的临时文件变成真实文件*/
-    private function tmpfile2attach($bid,$body){
+    public function tmpfile2attach($bid,$body){
         spClass('uploadFile')->set_diydir($bid);
         $truefile = spClass('uploadFile')->selectuptype(4);
         $tmpfile = spClass('uploadFile')->selectuptype(6);
