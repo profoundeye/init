@@ -21,13 +21,14 @@ class yb_photo extends basePostModel
         }
         $this->imagetype = substr($this->imagetype,0,-1);
         $this->display($this->mconfig['display']);
-    }
+   }
     
     function saved(){
 
         $used_image = $this->parseImg($this->spArgs('localimg'));
 		//$serial = serialize($used_image);
-		
+		//print_r($this->spArgs());
+		//print_r($used_image);exit;
         if(is_array($used_image)){
              $bodypre = '[attribute]'.serialize($used_image).'[/attribute]';
         }
