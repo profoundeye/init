@@ -57,7 +57,7 @@ function goUserBlog($params)
 	$bid = $params['bid']; //判断是否存在domain
 	$domain = $params['domain']; //判断是否存在domain
 	$uid   = $params['uid'];     //判断是否存在uid
-	if($bid){return spUrl('userblog','zshow',array('bid'=>$bid));}
+	if($bid){return spUrl('zshow','show',array('bid'=>$bid));}
 }
 spAddViewFunction('goUserBlog','goUserBlog');
 
