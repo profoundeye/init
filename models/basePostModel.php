@@ -249,7 +249,7 @@ abstract class basePostModel extends top
 	public function post_verify($info){
 		$verify = 0;
 		if($this->yb['post_verify_switch'] == 1){  //如果开启人工审核
-			return array('ret'=>$verify);
+			return array('ret'=>1);
 		}else if ($this->yb['post_verify_switch'] == 2){  //如果自动审核
 			if($this->yb['post_verify_keyword'] != ''){
 				$arr = trim(str_replace("\r\n",'|',$this->yb['post_verify_keyword'])); //导入关键字
