@@ -826,10 +826,12 @@ function getIP() {
 
 
 function converPic($a,$config=",w_630"){
+		global $spConfig;
 		$patterns[0]='(attachs/)';
 		$replacements[0]='images/';
 		$patterns[1]="/\.(jpg|png|jpeg|gif$)/s";
 		$replacements[1]="$config.$1";
+
 		if($spConfig["converPic"]){
 			return preg_replace($patterns, $replacements, $a);
 		}else{
