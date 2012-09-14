@@ -828,7 +828,7 @@ function getIP() {
 function converPic($a,$config=",w_630"){
 		$patterns[0]='(attachs/)';
 		$replacements[0]='images/';
-		$patterns[1]="/\.(jpg|png|jpeg|gif)/is";
+		$patterns[1]="/\.(jpg|png|jpeg|gif)$/is";
 		$replacements[1]="$config.$1";
 		return preg_replace($patterns, $replacements, $a);
 	}
