@@ -823,3 +823,13 @@ function ip2name($ip)
 function getIP() {
 	return $_SERVER['REMOTE_ADDR'];
 }
+
+
+function converPic($a,$config=",w_630"){
+		$patterns[0]='(attachs/)';
+		$replacements[0]='images/';
+		$patterns[1]="/\.(jpg|png|jpeg|gif)/is";
+		$replacements[1]="$config.$1";
+		return preg_replace($patterns, $replacements, $a);
+	}
+	
