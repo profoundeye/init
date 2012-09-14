@@ -830,6 +830,11 @@ function converPic($a,$config=",w_630"){
 		$replacements[0]='images/';
 		$patterns[1]="/\.(jpg|png|jpeg|gif$)/s";
 		$replacements[1]="$config.$1";
-		return preg_replace($patterns, $replacements, $a);exit;
+		if($spConfig["converPic"]){
+			return preg_replace($patterns, $replacements, $a);
+		}else{
+			return $a;
+		}
+		
 	}
 	
