@@ -828,7 +828,7 @@ function getIP() {
 function converPic($a,$config=",w_630"){
 		global $spConfig;
 		$patterns[0]='(attachs/)';
-		$replacements[0]='images/';
+		$replacements[0]='images/thumb/';
 		$patterns[1]="/\.(jpg|png|jpeg|gif$)/i";
 		$replacements[1]="$config.$1";
 
