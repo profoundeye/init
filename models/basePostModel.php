@@ -49,7 +49,7 @@ abstract class basePostModel extends top
         }
         $tag = '';
         if($this->spArgs('tag') != ''){
-            $tag = utf8_substr(substr((strip_tags($this->spArgs('tag'))),0,-1),0,30,0); //超过30自动截取
+            $tag = utf8_substr(substr((strip_tags($this->spArgs('tag'))),0,-1),0,50,0); //超过30自动截取
         }
 		if($this->spArgs('title') != ''){
 			$title = utf8_substr(strip_tags($this->spArgs('title')),0,50,0);
@@ -66,7 +66,12 @@ abstract class basePostModel extends top
 			'time' =>time()
         );
 		
-
+		//处理tag
+		spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
+		//重新获取最新的tag
+		
+		$rows['tag']=spClass('db_tags')->getBlogTags($bid);
+		//echo $rows['tag'];exit;
 		$ret = $this->post_verify($this->spArgs('textarea')); //检测审核机制
 		if($ret['ret'] == 1){
 			$rows['open'] = -2; //被审核
@@ -90,7 +95,7 @@ abstract class basePostModel extends top
             spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
         }
 		
-        spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
+        
 		$_SESSION['tempid'] = NULL;
         unset($_SESSION['tempid']);
 		return $bid;
