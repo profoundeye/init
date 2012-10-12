@@ -92,11 +92,13 @@ abstract class basePostModel extends top
         }else{
             $bid = $_SESSION['tempid'];
             $rows['body'] = $this->tmpfile2attach($bid,$rows['body']);
-            spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
-			
 			spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
 			//重新获取最新的tag		
 			$rows['tag']=spClass('db_tags')->getBlogTags($bid);
+			
+            spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
+			
+			
         }
 		
 		

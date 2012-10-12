@@ -49,17 +49,18 @@ class yb_photo extends basePostModel
 		$rs = spClass('db_blog')->find(array('bid'=>$this->spArgs('id')),"","body");
 		
 		$body = split_attribute($rs['body']);
-		//print_r($body);
+		//print_r($this->attach);
 		$imgRightArray = $body['attr']['img'];
 		foreach($imgRightArray as $i){
 			$temp[] = $this->returnTagImg($i['url'],$this->attach);
 		}
-		//print_r($temp);
+		//print_r($temp);exit;
 		$this->attach = $temp;
         $this->display($this->mconfig['display']);
     }
 	
 	function returnTagImg($tag,$forest){
+		$tag = str_replace("/t_", "/", $tag);
 		foreach ($forest as $k=>$f) {
 			if($f['path']==$tag){
 				return $forest[$k];
