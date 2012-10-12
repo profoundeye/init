@@ -95,7 +95,7 @@ abstract class basePostModel extends top
 			spClass('db_tags')->tagCreate($rows['tag'],$bid,$this->uid);
 			//重新获取最新的tag		
 			$rows['tag']=spClass('db_tags')->getBlogTags($bid);
-			
+			if($rows['tag']==null)$rows['tag']="";
             spClass('db_blog')->update(array('bid'=>$bid),$rows,$this->uid);
 			
 			

@@ -105,11 +105,6 @@ spAddViewFunction('notice_preg','notice_preg');
 
 
 /*获取大图*/
-function getBigImg($img)
-{
-	$imgs = str_replace('t_','',$img);
-	return $imgs;
-}
 
 /*发布图片的时候处理缩略图显示*/
 function thubimg($params)
@@ -842,3 +837,7 @@ function converPic($a,$config=",w_630"){
 		
 	}
 
+function getBigImg($img){
+	return str_replace("/t_", "/", $img);
+}
+	

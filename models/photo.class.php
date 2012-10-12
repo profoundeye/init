@@ -60,7 +60,7 @@ class yb_photo extends basePostModel
     }
 	
 	function returnTagImg($tag,$forest){
-		$tag = str_replace("/t_", "/", $tag);
+		$tag = getBigImg($tag);
 		foreach ($forest as $k=>$f) {
 			if($f['path']==$tag){
 				return $forest[$k];
@@ -95,7 +95,7 @@ class yb_photo extends basePostModel
                $dsc = ($desc == '图片说明（选填）') ? '' : $desc;
 				if($bid != 0){
 					$url = parent::tmpfile2attach($bid,$url);
-					spClass('db_attach')->update(array('id'=>$id,'path'=>$url),array('blogdesc'=>$dsc));
+					spClass('db_attach')->update(array('id'=>$id,'path'=>getBigImg($url)),array('blogdesc'=>$dsc));
 				}else{
 					spClass('db_attach')->update(array('id'=>$id),array('blogdesc'=>$dsc));
 				}
