@@ -45,8 +45,27 @@ class yb_photo extends basePostModel
     function edit(){
         parent::edit();
         $this->attach = spClass('db_attach')->findAll(array('bid'=>$this->spArgs('id')),'','id,path,blogdesc,mime');
+		//取出文章中的图片真实顺序
+		$rs = spClass('db_blog')->find(array('bid'=>$this->spArgs('id')),"","body");
+		
+		$body = split_attribute($rs['body']);
+		//print_r($body);
+		$imgRightArray = $body['attr']['img'];
+		foreach($imgRightArray as $i){
+			$temp[] = $this->returnTagImg($i['url'],$this->attach);
+		}
+		//print_r($temp);
+		$this->attach = $temp;
         $this->display($this->mconfig['display']);
     }
+	
+	function returnTagImg($tag,$forest){
+		foreach ($forest as $k=>$f) {
+			if($f['path']==$tag){
+				return $forest[$k];
+			}
+		}
+	}
     
     function uploadimg(){
         parent::swfupload($this->mconfig['cfg']['imagesize'],

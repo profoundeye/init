@@ -829,13 +829,15 @@ function converPic($a,$config=",w_630"){
 		global $spConfig;
 		$patterns[0]='(attachs/)';
 		$replacements[0]='http://www.zplaying.com/images/thumb/';
+		//$replacements[0]='images/thumb/';
 		$patterns[1]="/\.(jpg|png|jpeg|gif$)/i";
 		$replacements[1]="$config.$1";
 
 		if($spConfig["converPic"]){
 			return preg_replace($patterns, $replacements, $a);
 		}else{
-			return "http://www.zplaying.com/".$a;
+			//return "http://www.zplaying.com/".$a;
+			return $a;
 		}
 		
 	}
