@@ -825,7 +825,7 @@ function converPic($a,$config=",w_630"){
 		$patterns[0]='(attachs/)';
 		$replacements[0]='http://www.zplaying.com/images/thumb/';
 		//$replacements[0]='images/thumb/';
-		$patterns[1]="/\.(jpg$|png$|jpeg$|gif$)/i";
+		$patterns[1]="/\.(jpg\"|png\"|jpeg\"|gif\")/i";
 		$replacements[1]="$config.$1";
 
 		if($spConfig["converPic"]){
