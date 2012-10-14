@@ -99,7 +99,7 @@ class yb_photo extends basePostModel
 				}else{
 					spClass('db_attach')->update(array('id'=>$id),array('blogdesc'=>$dsc));
 				}
-                $datas['img'][] = array('url'=>$url,'desc'=>$dsc);
+                $datas['img'][] = array('url'=>$url,'desc'=>nl2br($dsc));
 			
 			
             }
