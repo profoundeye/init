@@ -6,7 +6,7 @@
   * 
   * 
   */
- class siteMap{
+ class sitemap{
  
  	#RSS还是SITEMAP标识符 取值为 rss,或者 sitemap
  	private $FLAGES = 'rss';
