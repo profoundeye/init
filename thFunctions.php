@@ -840,4 +840,22 @@ function converPic($a,$config=",w_630"){
 function getBigImg($img){
 	return str_replace("/t_", "/", $img);
 }
+
+
+
+function is_avatar_path($uid, $size = 'small', $type = '') {
+	$size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
+	$uida = abs(intval($uid));
+	$uid = sprintf("%09d", $uid);
+	$dir1 = substr($uid, 0, 3);
+	$dir2 = substr($uid, 3, 2);
+	$dir3 = substr($uid, 5, 2);
+	$typeadd = $type == 'real' ? '_real' : '';
+	$path =  $dir1.'/'.$dir2.'/'.$dir3.'/'.$typeadd.$size.'_'.substr($uid, -2).".jpg";
+	//return $path;
+	if($path=="000/00/00/small_02.jpg"){
+		return false;
+	}
+	return true;
+}
 	
