@@ -851,9 +851,9 @@ function is_avatar_path($uid, $size = 'small', $type = '') {
 	$dir2 = substr($uid, 3, 2);
 	$dir3 = substr($uid, 5, 2);
 	$typeadd = $type == 'real' ? '_real' : '';
-	$path =  $dir1.'/'.$dir2.'/'.$dir3.'/'.$typeadd.$size.'_'.substr($uid, -2).".jpg";
-	//return $path;
-	if($path=="000/00/00/small_02.jpg"){
+	$path =  avatar.'/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.$typeadd.$size.'_'.substr($uid, -2).".jpg";
+
+	if(!file_exists($path)){
 		return false;
 	}
 	return true;
