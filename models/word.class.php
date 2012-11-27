@@ -33,11 +33,19 @@ class yb_word extends basePostModel
     }
     
     function saved(){
+    	if(!islogin())return false;
         $used_image = $this->_localImgParse($this->spArgs('textarea'));  //过滤图像资源
         if(is_array($used_image)){
              $bodypre = '[attribute]'.serialize($used_image).'[/attribute]';
         }
-       if(parent::saved($bodypre)){
+		$bid = parent::saved($bodypre);
+       if($bid){
+	       	if($this->spArgs('ajax')){
+				//如果是页面提交，保存产品关联信息
+				$newData[]=array("blog_id"=>$bid,"product_id"=>$this->spArgs('pid'));
+				spClass('db_blog_product')->createAll($newData);
+				return true;
+			}
            header('Location:'.spUrl('main'));
        }
     }
