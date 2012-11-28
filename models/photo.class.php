@@ -20,6 +20,7 @@ class yb_photo extends basePostModel
             $this->imagetype .= '*.'.$d.';';
         }
         $this->imagetype = substr($this->imagetype,0,-1);
+		if($this->spArgs('pid')){$this->pid = $this->spArgs('pid');}		
         $this->display($this->mconfig['display']);
    }
     
@@ -27,13 +28,22 @@ class yb_photo extends basePostModel
 
         $used_image = $this->parseImg($this->spArgs('localimg'));
 		//$serial = serialize($used_image);
-		//print_r($this->spArgs());
+		//print_r($this->spArgs());exit;
 		//print_r($used_image);exit;
         if(is_array($used_image)){
              $bodypre = '[attribute]'.serialize($used_image).'[/attribute]';
         }
       if($_bid = parent::saved($bodypre)){
-           header('Location:'.spUrl('product','index',array('bid'=>$_bid)));
+      	   if($this->spArgs('pid')){
+      	   		//如果已经有产品信息pid，直接保存产品库关联
+			   	spClass('db_blog_product')->save($_bid,$this->spArgs('pid'));
+				header('Location:'.spUrl('zshow','show',array('bid'=>$_bid)));
+      	   }else{
+      	   		header('Location:'.spUrl('product','index',array('bid'=>$_bid)));
+      	   }
+      	   		
+      	   
+           
        }
 	   
 	   /*   if($_bid = parent::saved($bodypre)){
