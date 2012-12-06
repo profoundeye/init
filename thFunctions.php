@@ -824,7 +824,7 @@ function converPic($a,$config=",w_630"){
 		global $spConfig;
 		$patterns[0]='(attachs/)';
 		//$replacements[0]='http://www.zplaying.com/images/thumb/';
-		$replacements[0]="http://zplaying.qiniudn.com/";
+		$replacements[0]="http://zplaying.qiniudn.com/images/thumb/";
 		//$replacements[0]='images/thumb/';
 		$patterns[1]="/\.(jpg\"|png\"|jpeg\"|gif\")/i";
 		$replacements[1]="$config.$1";
