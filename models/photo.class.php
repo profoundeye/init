@@ -20,7 +20,9 @@ class yb_photo extends basePostModel
             $this->imagetype .= '*.'.$d.';';
         }
         $this->imagetype = substr($this->imagetype,0,-1);
-		if($this->spArgs('pid')){$this->pid = $this->spArgs('pid');}		
+		if($this->spArgs('pid')){$this->pid = $this->spArgs('pid');}
+		if($this->spArgs('sh')){$this->sh = $this->spArgs('sh');}
+				
         $this->display($this->mconfig['display']);
    }
     
