@@ -81,7 +81,7 @@ class top extends spController
 	protected function needLogin(){
 		if(0 == $this->uid)
 		{
-			$this->api_error('您需要登录才能继续操作');
+			$this->api_error('您尚未登录，请先登录：<a href="'.spUrl("openconnect","weibo").'">sina微博登录</a>');
 		}
 	}
 	

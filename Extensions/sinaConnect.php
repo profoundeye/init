@@ -62,6 +62,7 @@ class sinaConnect{
 			$_SESSION['weibo']['oauth_token'] = $token['access_token'];
 			$_SESSION['weibo']['openid'] = $token['uid'];
 			$_SESSION['weibo']['expires'] = time() + $token['expires_in'];
+			
 			$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,$_SESSION['weibo']['oauth_token']);
 			$info = $c->show_user_by_id($_SESSION['weibo']['openid']);//根据ID获取用户等基本信息
 			if($info['gender'] == 'm'){
@@ -80,6 +81,7 @@ class sinaConnect{
 				'domain'   => $info['domain'],
 				'sex'      => $info['gender'],
 			);
+			$_SESSION['weibo']['name'] = $info['screen_name'];
 			$_SESSION['weibo']['userinfo'] = $userinfo;
 			$_SESSION['weibo']['type'] = 2;
 			return true;

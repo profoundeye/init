@@ -859,4 +859,8 @@ function is_avatar_path($uid, $size = 'small', $type = '') {
 	}
 	return true;
 }
+
+	function showReal($v){
+		return $v*-1;
+	}
 	
