@@ -74,14 +74,14 @@ class sinaConnect{
 			}
 
 			$userinfo = array(
-				'name'   => $info['screen_name'],
+				'name'   => $info['name'],
 				'location' => $info['location'],
 				'desc'     => $info['description'],
 				'avatar'   => $info['avatar_large'],
 				'domain'   => $info['domain'],
 				'sex'      => $info['gender'],
 			);
-			$_SESSION['weibo']['name'] = $info['screen_name'];
+			$_SESSION['weibo']['name'] = $info['name'];
 			$_SESSION['weibo']['userinfo'] = $userinfo;
 			$_SESSION['weibo']['type'] = 2;
 			return true;
