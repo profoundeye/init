@@ -30,7 +30,7 @@ return array(
 	'sp_access_store' => array(), // 使用spAccess保存到内存的变量
 	'view_registered_functions' => array(), // 视图内挂靠的函数记录
 
-	'default_controller' => 'main', // 默认的控制器名称
+	'default_controller' => 'mybuy', // 默认的控制器名称
 	'default_action' => 'index',  // 默认的动作名称
 	'url_controller' => 'c',  // 请求时使用的控制器变量标识
 	'url_action' => 'a',  // 请求时使用的动作变量标识
