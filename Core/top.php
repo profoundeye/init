@@ -74,13 +74,16 @@ class top extends spController
 	
 	/*无提示跳转*/
 	public function jslocation($x){
+		$x = $_SESSION["jumpUrl"]?$_SESSION["jumpUrl"]:$x;
+		$_SESSION["jumpUrl"]="";
 		exit('<script language="javascript" type="text/javascript"> parent.window.location.href="'.$x.'";</script>');
 	}
 	
 	/*需要登录*/
-	protected function needLogin(){
+	public function needLogin(){
 		if(0 == $this->uid)
 		{
+			
 			$this->api_error('您尚未登录，请先登录：<a href="'.spUrl("openconnect","weibo").'">sina微博登录</a>');
 		}
 	}
